@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.7
+# Glass Menu - Jo5-k — 0.1.8
 
 ## Português
 
@@ -29,3 +29,9 @@ Pokédex, Trainer Card e PC receberam integração específica. As telas gerenci
 Dedicated integration for Pokédex, Trainer Card and PC. Managed screens keep the field underneath translucent panels; Original retains native presentation. Fixes Hoenn screen identifiers, card front/back surfaces, item storage, buttons, party slots and box-selection panels. Pokémon, portraits, text and box wallpapers stay separate.
 
 See [changes and validation](docs/CHANGELOG.md). Only simulated tests and official loader checks were performed, not ROM/GPU or physical Android visual validation. / Consulte as mudanças e os testes; sem validação visual em ROM/GPU ou Android físico.
+
+## 0.1.8 — Language / Idioma
+
+English is the first language option and the default when no preference is saved. START → GLASS also offers Portuguese. Theme names, text settings, title and controls update immediately; the native manager saves the choice. Native game and translation-mod text are preserved.
+
+English é a primeira opção de idioma e o padrão quando não há preferência salva. START → GLASS também oferece Português. Nomes dos temas, ajustes de texto, título e instruções mudam imediatamente; a escolha é salva pelo gerenciador nativo. Textos do jogo e de mods de tradução são preservados.

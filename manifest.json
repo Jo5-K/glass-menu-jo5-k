@@ -1,7 +1,7 @@
 {
   "id": "glass_menu_jo5k",
   "name": "Glass Menu - Jo5-k",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "api": 3,
   "entry": "main.lua",
   "profile": "overhaul",

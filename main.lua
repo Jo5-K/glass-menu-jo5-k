@@ -11,9 +11,10 @@ return function(mod)
  local R={active=true,depth=0,patches={},subscriptions={},failures=0}
  Game[lease]=R
  mod.options:define({
+  {key='language',label='Language / Idioma',type='choice',default='en',group='Glass Menu - Jo5-k',choices={{'English','en'},{'Português','pt-BR'}}},
   {key='enabled',label='Glass Menu',type='toggle',default=true,group='Glass Menu - Jo5-k'},
-  {key='text_style',label='Texto',type='choice',default='native',group='Glass Menu - Jo5-k',choices={{'Nativo','native'},{'Claro','light'},{'Escuro','dark'}}},
-  {key='theme',label='Tema',type='choice',default='crystal_glass',group='Glass Menu - Jo5-k',choices={{'Original','original'},{'Glass','crystal_glass'},{'Marfim','emerald_ivory'},{'GBA','emerald_gba'},{'Atual','current'},{'Clássico','classic'},{'Flutuante','floating_glass'},{'Emerald Verde','emerald_green'},{'Emerald GBA','emerald_native'}}}
+  {key='text_style',label='Text / Texto',type='choice',default='native',group='Glass Menu - Jo5-k',choices={{'Native','native'},{'Light','light'},{'Dark','dark'}}},
+  {key='theme',label='Theme / Tema',type='choice',default='crystal_glass',group='Glass Menu - Jo5-k',choices={{'Original','original'},{'Glass','crystal_glass'},{'Ivory','emerald_ivory'},{'GBA','emerald_gba'},{'Current','current'},{'Classic','classic'},{'Floating','floating_glass'},{'Emerald Green','emerald_green'},{'Emerald GBA','emerald_native'}}}
  })
  local function battle()
   local B=package.loaded['src.core.game3.battle.init']
@@ -93,20 +94,37 @@ return function(mod)
  local floating=assert(load(assert(mod:read('floating.lua')),'@glass_menu_jo5k/floating.lua'))()(R,wrap,mod,S,battle)
  local stopSurfaces=assert(load(assert(mod:read('surfaces.lua')),'@glass_menu_jo5k/surfaces.lua'))()(R,wrap,enabled,mod,S)
  local SCREEN='glass_menu_jo5k:settings'
- local themes={{'Original','original'},{'Glass','crystal_glass'},{'Marfim','emerald_ivory'},{'GBA','emerald_gba'},{'Atual','current'},{'Clássico','classic'},{'Flutuante','floating_glass'},{'Emerald Verde','emerald_green'},{'Emerald GBA','emerald_native'}}
+ local words={
+  en={title='GLASS / SETTINGS',hint='A: apply   B: back',theme='Theme',text='Text',language='Language',
+   original='Original',crystal_glass='Glass',emerald_ivory='Ivory',emerald_gba='GBA',current='Current',classic='Classic',floating_glass='Floating',emerald_green='Emerald Green',emerald_native='Emerald GBA',native='Native',light='Light',dark='Dark'},
+  ['pt-BR']={title='GLASS / AJUSTES',hint='A: aplicar   B: voltar',theme='Tema',text='Texto',language='Idioma',
+   original='Original',crystal_glass='Glass',emerald_ivory='Marfim',emerald_gba='GBA',current='Atual',classic='Clássico',floating_glass='Flutuante',emerald_green='Emerald Verde',emerald_native='Emerald GBA',native='Nativo',light='Claro',dark='Escuro'}
+ }
+ local function lang() return words[mod.options:get('language')] or words.en end
+ local defaults={language='en',theme='crystal_glass',text_style='native'}
+ local themes={'original','crystal_glass','emerald_ivory','emerald_gba','current','classic','floating_glass','emerald_green','emerald_native'}
  mod.content.screens:register(SCREEN,{new=function(game)
   local items={}
-  for _,entry in ipairs(themes) do
-   items[#items+1]={label='Tema: '..entry[1],key='theme',value=entry[2],right=mod.options:get('theme')==entry[2] and '*' or ''}
+  -- Language is first, and English is its first choice.
+  for _,entry in ipairs({{'English','en'},{'Português','pt-BR'}}) do
+   items[#items+1]={key='language',value=entry[2],name=entry[1]}
   end
-  for _,entry in ipairs({{'Nativo','native'},{'Claro','light'},{'Escuro','dark'}}) do
-   items[#items+1]={label='Texto: '..entry[1],key='text_style',value=entry[2],right=(mod.options:get('text_style') or 'native')==entry[2] and '*' or ''}
+  for _,value in ipairs(themes) do items[#items+1]={key='theme',value=value} end
+  for _,value in ipairs({'native','light','dark'}) do items[#items+1]={key='text_style',value=value} end
+  local function refresh(menu)
+   local l=lang();menu.title=l.title
+   for _,row in ipairs(menu.items) do
+    local group=row.key=='text_style' and 'text' or row.key
+    row.label=l[group]..': '..(row.name or l[row.value])
+    row.right=(mod.options:get(row.key) or defaults[row.key])==row.value and '*' or ''
+   end
   end
-  local menu=mod.ui.ListMenu.new(game,'Glass Menu / Tema',items,{onChoose=function(item,menu)
+  local menu=mod.ui.ListMenu.new(game,lang().title,items,{onChoose=function(item,menu)
    require('src.mods.ManagerState').new(game):setOption(mod.id,item.key,item.value)
    require('src.mods.ManagerState').new(game):setOption(mod.id,'enabled',true)
-   for _,row in ipairs(menu.items) do row.right=(mod.options:get(row.key) or (row.key=='text_style' and 'native' or 'crystal_glass'))==row.value and '*' or '' end
+   refresh(menu)
   end})
+  refresh(menu)
   -- Gen3 must use its ROM font; the generic ListMenu renderer uses Gen1 glyphs.
   menu.glass_menu_jo5k=true
   menu.gbaCanvas=true
@@ -114,13 +132,14 @@ return function(mod)
   function menu:draw()
    local g=love.graphics;g.push('all')
    local ok,err=pcall(function()
+    refresh(self)
     local theme=mod.options:get('theme') or 'crystal_glass'
     if theme=='original' then
      g.setColor(1,1,.90,1);g.rectangle('fill',14,7,212,146)
      g.setColor(.18,.25,.23,1);g.setLineWidth(1);g.rectangle('line',14.5,7.5,211,145)
     else S.menuPanel(14,7,212,146,theme) end
     local opts={colors=Font.COLOR.NORMAL,maxWidth=192}
-    Font.draw('GLASS / AJUSTES',24,13,opts)
+    Font.draw(lang().title,24,13,opts)
     for r=1,self.rows do
      local i=self.scroll+r;local row=self.items[i]
      if not row then break end
@@ -132,7 +151,7 @@ return function(mod)
      Font.draw(row.label,38,y,opts)
      if row.right=='*' then Font.draw('*',201,y,opts) end
     end
-    Font.draw('A: aplicar   B: voltar',24,135,opts)
+    Font.draw(lang().hint,24,135,opts)
    end)
    g.pop();if not ok then error(err,0) end
   end

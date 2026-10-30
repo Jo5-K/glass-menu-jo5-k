@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.7
+# Glass Menu - Jo5-k — 0.1.8
 
 Mod independente para G1R 0.3.97+, API 3, Emerald, Ruby, Sapphire, FireRed e LeafGreen.
 
@@ -57,3 +57,7 @@ Testes específicos cobrem renderMap principal da Pokédex, seleção de fundo d
 Adicionados os identificadores item_pc e rse_item_storage ao tratamento flutuante. As texturas privadas do PC são registradas por identidade após PcChrome.ensure: fundo, moldura, botões, painel da equipe, slots pequenos, janela de escolher caixa e faixa de transição. O tema não envolve o desenho completo da equipe: Pokémon, itens, cursores, textos e papel de parede selecionado para a caixa continuam separados. Os menus e confirmações que usam Window/Chrome mantêm seus dados e navegação nativos.
 
 Testes simulados cobrem aplicação do tema em slots de 32×24, preservação do papel de parede, retorno nativo de ensure, identificadores do depósito, exclusão de Original e batalha, e carregamento API 3 nos cinco jogos. Sem validação visual de ROM/GPU ou Android físico. Apenas instalação local; ainda não há release 0.1.7 no índice.
+
+## 0.1.8 — Language / Idioma
+
+START → GLASS começa com Language: English e Language: Português. English é a primeira opção e o padrão quando a preferência não existe. Título, temas, estilos de texto e instruções acompanham imediatamente o idioma escolhido, salvo pelo gerenciador nativo. As configurações do gerenciador também oferecem Language / Idioma como primeira opção. A tradução própria não substitui nomes ou diálogos do jogo e de outros mods. Testes no carregador dos cinco jogos verificam ordem, seleção, persistência e tradução imediata em inglês e português. Versão instalada localmente; publicação depende de nova release.
