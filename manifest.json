@@ -1,0 +1,26 @@
+{
+  "id": "glass_menu_jo5k",
+  "name": "Glass Menu - Jo5-k",
+  "version": "0.1.4",
+  "api": 3,
+  "entry": "main.lua",
+  "profile": "overhaul",
+  "category": "UI",
+  "priority": 260,
+  "games": [
+    "emerald",
+    "ruby",
+    "sapphire",
+    "firered",
+    "leafgreen"
+  ],
+  "game_version": ">=0.3.97",
+  "permissions": [
+    "engine_internals"
+  ],
+  "affects_link": false,
+  "author": "Jo5-k",
+  "description": "Native field menu presentation; excludes battle menus.",
+  "experimental": true,
+  "github": "Jo5-K/glass-menu-jo5-k"
+}
