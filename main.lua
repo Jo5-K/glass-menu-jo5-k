@@ -90,6 +90,7 @@ return function(mod)
   end
   return old(text,x,y,opts)
  end)
+ local floating=assert(load(assert(mod:read('floating.lua')),'@glass_menu_jo5k/floating.lua'))()(R,wrap,mod,S,battle)
  local stopSurfaces=assert(load(assert(mod:read('surfaces.lua')),'@glass_menu_jo5k/surfaces.lua'))()(R,wrap,enabled,mod,S)
  local SCREEN='glass_menu_jo5k:settings'
  local themes={{'Original','original'},{'Glass','crystal_glass'},{'Marfim','emerald_ivory'},{'GBA','emerald_gba'},{'Atual','current'},{'Clássico','classic'},{'Flutuante','floating_glass'},{'Emerald Verde','emerald_green'},{'Emerald GBA','emerald_native'}}
@@ -107,6 +108,7 @@ return function(mod)
    for _,row in ipairs(menu.items) do row.right=(mod.options:get(row.key) or (row.key=='text_style' and 'native' or 'crystal_glass'))==row.value and '*' or '' end
   end})
   -- Gen3 must use its ROM font; the generic ListMenu renderer uses Gen1 glyphs.
+  menu.glass_menu_jo5k=true
   menu.gbaCanvas=true
   menu.rows=6
   function menu:draw()
@@ -160,5 +162,5 @@ return function(mod)
  end
  R.subscriptions[#R.subscriptions+1]=mod.hooks:wrap('core.quit_to_launcher',function(nextFn,...) R.shutdown();return nextFn(...) end)
  mod.exports.shutdown=R.shutdown
- mod.exports.diagnostics=function() return {active=R.active,failures=R.failures,battleExcluded=battle()} end
+ mod.exports.diagnostics=function() return {active=R.active,failures=R.failures,battleExcluded=battle(),floating=floating.active()} end
 end

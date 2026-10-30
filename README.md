@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.4
+# Glass Menu - Jo5-k — 0.1.7
 
 ## Português
 
@@ -21,3 +21,11 @@ Official 0.3.97 loader and simulated tests passed for the five games. No physica
 [Releases](https://github.com/Jo5-K/glass-menu-jo5-k/releases). The manifest declares this repository for the native updater. / O manifesto indica este repositório para o atualizador nativo.
 
 See LICENSE.md and THIRD_PARTY_NOTICES.md for inherited code and resources. / Consulte os arquivos de licença e créditos dos recursos herdados.
+
+## 0.1.7 — Menus flutuantes / Floating menus
+
+Pokédex, Trainer Card e PC receberam integração específica. As telas gerenciadas mantêm o mundo por baixo, com painéis translúcidos; Original continua nativo. Corrigidos identificadores da Pokédex de Hoenn, cartão e depósito de itens; fundos de frente/verso, botões, slots da equipe e escolha de caixas recebem o tema. Pokémon, retratos, textos e papéis de parede das caixas permanecem separados.
+
+Dedicated integration for Pokédex, Trainer Card and PC. Managed screens keep the field underneath translucent panels; Original retains native presentation. Fixes Hoenn screen identifiers, card front/back surfaces, item storage, buttons, party slots and box-selection panels. Pokémon, portraits, text and box wallpapers stay separate.
+
+See [changes and validation](docs/CHANGELOG.md). Only simulated tests and official loader checks were performed, not ROM/GPU or physical Android visual validation. / Consulte as mudanças e os testes; sem validação visual em ROM/GPU ou Android físico.
