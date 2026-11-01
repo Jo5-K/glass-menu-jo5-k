@@ -26,7 +26,7 @@ return function(R,wrap,mod,S,battle)
  -- Many native screens fill a complete opaque rectangle before drawing icons.
  -- Change only large UI fills, in the UI pass of one of the supported menus.
  wrap(love.graphics,'rectangle',function(old,mode,x,y,w,h,...)
-  if active() and R.depth>0 and owned() and mode=='fill' and type(w)=='number' and type(h)=='number' and w>=80 and h>=24 then
+  if active() and R.depth>0 and owned() and Stack.top().id~='summary' and mode=='fill' and type(w)=='number' and type(h)=='number' and w>=80 and h>=24 then
    local g=love.graphics
    if not(g.getColor and g.setColor) then return old(mode,x,y,w,h,...) end
    local r,green,b,a=g.getColor()

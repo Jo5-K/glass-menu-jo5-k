@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.8
+# Glass Menu - Jo5-k — 0.1.9
 
 Mod independente para G1R 0.3.97+, API 3, Emerald, Ruby, Sapphire, FireRed e LeafGreen.
 
@@ -61,3 +61,7 @@ Testes simulados cobrem aplicação do tema em slots de 32×24, preservação do
 ## 0.1.8 — Language / Idioma
 
 START → GLASS começa com Language: English e Language: Português. English é a primeira opção e o padrão quando a preferência não existe. Título, temas, estilos de texto e instruções acompanham imediatamente o idioma escolhido, salvo pelo gerenciador nativo. As configurações do gerenciador também oferecem Language / Idioma como primeira opção. A tradução própria não substitui nomes ou diálogos do jogo e de outros mods. Testes no carregador dos cinco jogos verificam ordem, seleção, persistência e tradução imediata em inglês e português. Versão instalada localmente; publicação depende de nova release.
+
+## 0.1.9 — fundo do resumo
+
+Resumo e seleção de golpes mantêm o conteúdo nativo e recebem apenas tratamento de fundo. Textos, cores dos golpes, retratos, barras e navegação não passam pelo reestilo genérico nesta tela. Em batalha e evolução originada por batalha, o 2D Battle Menu assume a apresentação; o Glass Menu continua excluído. Nova versão instalada localmente, sem release nesta etapa. Teste específico de fundo e badge preservado passou, além do Loader oficial nos cinco jogos.

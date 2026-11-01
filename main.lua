@@ -80,7 +80,8 @@ return function(mod)
   if style=='dark' then return {.08,.14,.18,1},{.96,.98,1,1} end
  end
  wrap(Font,'draw',function(old,text,x,y,opts)
-  if R.active and R.depth>0 and not battle() and mod.options:get('enabled')~=false then
+  local Stack=package.loaded['src.ui.game3.stack'];local top=Stack and Stack.top()
+  if R.active and R.depth>0 and not battle() and not(top and top.id=='summary') and mod.options:get('enabled')~=false then
    local ink,shadow=textColors()
    if ink then
     local copy={};for k,v in pairs(opts or {}) do copy[k]=v end
@@ -93,6 +94,7 @@ return function(mod)
  end)
  local floating=assert(load(assert(mod:read('floating.lua')),'@glass_menu_jo5k/floating.lua'))()(R,wrap,mod,S,battle)
  local stopSurfaces=assert(load(assert(mod:read('surfaces.lua')),'@glass_menu_jo5k/surfaces.lua'))()(R,wrap,enabled,mod,S)
+ local stopSummary=assert(load(assert(mod:read('summary_background.lua')),'@glass_menu_jo5k/summary_background.lua'))()(wrap,function() return floating.active() end,function() return S.menuPalette(mod.options:get('theme'))[1] end)
  local SCREEN='glass_menu_jo5k:settings'
  local words={
   en={title='GLASS / SETTINGS',hint='A: apply   B: back',theme='Theme',text='Text',language='Language',
@@ -177,7 +179,7 @@ return function(mod)
   if not R.active then return end;R.active=false
   for i=#R.subscriptions,1,-1 do if type(R.subscriptions[i])=='function' then R.subscriptions[i]() end end
   for i=#R.patches,1,-1 do local p=R.patches[i];if p[1][p[2]]==p[4] then p[1][p[2]]=p[3] end end
-  stopSurfaces();S.shutdown();if Game[lease]==R then Game[lease]=nil end
+  stopSummary();stopSurfaces();S.shutdown();if Game[lease]==R then Game[lease]=nil end
  end
  R.subscriptions[#R.subscriptions+1]=mod.hooks:wrap('core.quit_to_launcher',function(nextFn,...) R.shutdown();return nextFn(...) end)
  mod.exports.shutdown=R.shutdown

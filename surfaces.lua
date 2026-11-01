@@ -116,6 +116,8 @@ return function(R,wrap,enabled,mod,S)
    if q and (type(q)=='table' or type(q)=='userdata') and q.getViewport then local x,y; x,y,w,h=q:getViewport() end
    cardSurface=w==240 and h==160
   end
+  local Stack=package.loaded['src.ui.game3.stack'];local top=Stack and Stack.top()
+  if top and top.id=='summary' then return old(img,...)end
   if not enabled() or not(depth>0 or marked[img] or cardSurface) then return old(img,...) end
   local g=love.graphics
   local nativeShader=g.getShader and g.getShader()

@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.8
+# Glass Menu - Jo5-k — 0.1.9
 
 ## Português
 
@@ -35,3 +35,25 @@ See [changes and validation](docs/CHANGELOG.md). Only simulated tests and offici
 English is the first language option and the default when no preference is saved. START → GLASS also offers Portuguese. Theme names, text settings, title and controls update immediately; the native manager saves the choice. Native game and translation-mod text are preserved.
 
 English é a primeira opção de idioma e o padrão quando não há preferência salva. START → GLASS também oferece Português. Nomes dos temas, ajustes de texto, título e instruções mudam imediatamente; a escolha é salva pelo gerenciador nativo. Textos do jogo e de mods de tradução são preservados.
+
+## 0.1.9
+
+## Português
+- Resumo e seleção de golpes fora da batalha recebem somente tratamento do fundo.
+- Preservados textos nativos, cores dos tipos, dados, retratos, barras e navegação.
+- Removida a interferência do reestilo genérico de texto/preenchimento nessa tela.
+- Menus abertos durante batalha/evolução originada pela batalha continuam sob responsabilidade do 2D Battle Menu.
+- Mantidas as opções independentes de Tema, Texto e Idioma, com English como primeira opção.
+
+## English
+- Field summary and move selection now receive background-only styling.
+- Native text, type colors, data, portraits, bars and navigation are preserved.
+- Generic text/fill restyling no longer interferes with this screen.
+- Battle-origin summary and evolution menus remain owned by 2D Battle Menu.
+- Independent Theme, Text and Language settings retained, with English first.
+
+**Compatibility / Compatibilidade:** G1R 0.3.97+, API 3; FireRed, LeafGreen, Ruby, Sapphire, Emerald. Field menus only / apenas fora da batalha.
+
+**Validation / Validação:** official loader passed in all five games; background-only tests verify move badge preservation, shader restoration and scope separation. No ROM/GPU or physical Android visual validation was performed. / Sem validação visual em ROM/GPU real ou Android físico.
+
+Import the ZIP and restart G1R. Settings: START → GLASS. / Importe o ZIP e reinicie o G1R.
