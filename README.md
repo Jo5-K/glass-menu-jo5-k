@@ -1,4 +1,4 @@
-# Glass Menu - Jo5-k — 0.1.9
+# Glass Menu - Jo5-k — 0.1.10
 
 ## Português
 
@@ -35,6 +35,11 @@ See [changes and validation](docs/CHANGELOG.md). Only simulated tests and offici
 English is the first language option and the default when no preference is saved. START → GLASS also offers Portuguese. Theme names, text settings, title and controls update immediately; the native manager saves the choice. Native game and translation-mod text are preserved.
 
 English é a primeira opção de idioma e o padrão quando não há preferência salva. START → GLASS também oferece Português. Nomes dos temas, ajustes de texto, título e instruções mudam imediatamente; a escolha é salva pelo gerenciador nativo. Textos do jogo e de mods de tradução são preservados.
+
+## 0.1.10
+
+- Submenus da equipe rolam quando a lista excede oito linhas, incluindo HMs adicionados pelo QoL.
+- Sombra mais visível nos painéis sobre o mapa.
 
 ## 0.1.9
 

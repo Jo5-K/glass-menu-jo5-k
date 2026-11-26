@@ -92,6 +92,27 @@ return function(mod)
   end
   return old(text,x,y,opts)
  end)
+ -- The native renderer sizes the popup from the full list. Give it only
+ -- the visible rows while drawing; update still sees the original actions.
+ local PartyMenu=require('src.ui.game3.party_menu')
+ local visibleRows=8
+ wrap(PartyMenu,'draw',function(old,...)
+  if not enabled() or not PartyMenu.open then return old(...) end
+  local listKey,cursorKey
+  if PartyMenu.mode=='action' then listKey,cursorKey='ACTIONS','actionCursor'
+  elseif PartyMenu.mode=='item_action' then listKey,cursorKey='ITEM_ACTIONS','itemActionCursor'
+  else return old(...) end
+  local actions,cursor=PartyMenu[listKey],PartyMenu[cursorKey]
+  if not actions or #actions<=visibleRows then return old(...) end
+  local first=math.max(1,cursor-visibleRows+1)
+  local rows={}
+  for i=1,visibleRows do rows[i]=actions[first+i-1] end
+  PartyMenu[listKey],PartyMenu[cursorKey]=rows,cursor-first+1
+  local result=pack(pcall(old,...))
+  PartyMenu[listKey],PartyMenu[cursorKey]=actions,cursor
+  if not result[1] then error(result[2],0) end
+  return unpack(result,2,result.n)
+ end)
  local floating=assert(load(assert(mod:read('floating.lua')),'@glass_menu_jo5k/floating.lua'))()(R,wrap,mod,S,battle)
  local stopSurfaces=assert(load(assert(mod:read('surfaces.lua')),'@glass_menu_jo5k/surfaces.lua'))()(R,wrap,enabled,mod,S)
  local stopSummary=assert(load(assert(mod:read('summary_background.lua')),'@glass_menu_jo5k/summary_background.lua'))()(wrap,function() return floating.active() end,function() return S.menuPalette(mod.options:get('theme'))[1] end)
